@@ -1,0 +1,104 @@
+Algoritmo actividadCompl
+	
+	Definir verif, i, j, n, cont, contador Como Entero
+	Definir char, matriz, r, matrizB  Como Caracter
+	Definir muestra como cadena
+	Definir validaLong, validaChar, diagonalA, diagonalB Como Logico
+	
+	Escribir "ingrese la muestra de ADN"
+	
+	Repetir
+		Leer muestra
+		verif = Longitud(muestra)
+		si verif = 9 o verif = 16
+			validaLong= Verdadero
+		SiNo
+			validaLong= Falso
+			Escribir "Muestra no valida. Por favor ingrese la muestra nuevamente"
+		FinSi
+		validaChar=Falso
+		si validaLong=Verdadero 
+			muestra=Mayusculas(Muestra)
+		    Para i=0 Hasta verif-1 Hacer
+				char=Subcadena(muestra,i,i)
+			    si char <> "A" y  char <> "B" y char <> "C" y char <> "D" Entonces
+					validaChar=Falso
+					i=verif
+			    SiNo
+				validaChar=Verdadero
+			    FinSi
+		    FinPara
+			si validaChar=Falso
+				Escribir "Muestra no valida. Por favor ingrese la muestra nuevamente"
+			FinSi
+	    FinSi
+	Mientras Que validaLong = Falso o validaChar = Falso 
+	
+	Escribir "=================="
+	Escribir "Validación exitosa"
+	Escribir "=================="
+	
+	n=raiz(verif)
+	Dimension matriz(n,n)
+	cont=0
+	
+	Para i=0 Hasta n-1 Hacer
+		Para j=0 Hasta n-1 Hacer
+			matriz(i,j) = Subcadena(muestra,cont,cont)
+			cont=cont+1
+		FinPara
+	FinPara
+	
+	Para i=0 Hasta n-1 Hacer
+		Para j=0 Hasta n-1 Hacer
+			Escribir matriz(i,j) " | "Sin Saltar
+		FinPara
+		Escribir ""
+	FinPara
+	Escribir "=================="
+	
+	
+	//verifical diagonal principal
+	r=matriz(0,0)
+	contador=0
+	Para i=0 Hasta n-1 Hacer
+		Para j=0 Hasta n-1 Hacer
+			si i=j Entonces
+				si matriz(i,j) = r Entonces
+					contador=contador+1
+				FinSi
+			FinSi
+		FinPara
+	FinPara
+	si n=contador Entonces
+		DiagonalA=Verdadero
+	SiNo
+		DiagonalA=Falso
+	FinSi
+	
+	
+	//verificar diagonal secundaria
+	r=matriz(0,n-1)
+	contador=0
+	Para i=0 Hasta n-1 Hacer
+		Para j=0 Hasta n-1 Hacer
+			si j= (n-1)-i
+			     si matriz(i,j) = r Entonces
+				 contador=contador+1
+			FinSi
+		FinSi
+		
+		FinPara
+	FinPara
+	si n=contador Entonces
+		DiagonalB=Verdadero
+	SiNo
+		DiagonalB=Falso
+	FinSi
+	
+	si DiagonalA=Verdadero y DiagonalB=Verdadero 
+		Escribir "¡Felicidades! La muestra contiene patrones específicos en sus diagonales."
+	SiNo
+		Escribir "La muestra NO contiene los patrones especificados en sus diagonales"
+	FinSi
+FinAlgoritmo
